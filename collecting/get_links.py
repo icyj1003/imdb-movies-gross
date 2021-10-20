@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+### add 
 file_name = "links.txt"
 
 f = open(file=file_name, mode='w')
