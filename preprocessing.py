@@ -1,5 +1,6 @@
 import pandas as pd
 from imdb.cleaning import *
+
 # đọc bộ dữ liệu thô
 df = pd.read_csv('./data/data.csv')
 
