@@ -1,3 +1,5 @@
+from sklearn.impute import KNNImputer
+import numpy as np
 import pandas as pd
 from imdb.cleaning import *
 
@@ -24,6 +26,12 @@ df['color'] = df['color'].apply(pp_color)
 df['casts'] = df['casts'].apply(pp_cast)
 df['writers'] = df['writers'].apply(pp_writer)
 df['aspect_ratio'] = df['aspect_ratio'].apply(pp_ar)
+
+# sắp xếp lại các thuộc tính
+
+df = df[['title', 'casts', 'directors', 'writers', 'genres',
+         'certificate', 'countries_of_origin', 'languages', 'production_companies', 'sound_mix', 'aspect_ratio', 'color', 'budget', 'runtime', 'release_date', 'score', 'votes', 'user_reviews',
+         'critic_reviews', 'metascore', 'gross_worldwide']]
 
 # lưu bộ dữ liệu
 df.to_csv('./data/data_preprocessed.csv', index=False, encoding='utf-8-sig')

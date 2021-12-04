@@ -4,7 +4,7 @@ import re
 
 def currency_conv(old):
     """ KHÔI
-    input: một chuỗi thể đầu vào thể hiện đơn vị tiền tệ cần đổi
+    input: một chuỗi đầu vào thể hiện đơn vị tiền tệ cần đổi
     output: số tiền khi đã chuyển ra $
     """
     if old != None and old != "":
@@ -193,6 +193,7 @@ def currency_conv(old):
 def certification_conv(old):
     """ KHÔI
     Tại liệu tham khảo
+    Chuyển đổi các tiêu chuẩn phân loại phim về của Việt Nam
     https://rating-system.fandom.com/wiki/Vietnam_Movie_Rating_System
     https://en.wikipedia.org/wiki/TV_Parental_Guidelines
     https://en.wikipedia.org/wiki/Motion_Picture_Association_film_rating_system
