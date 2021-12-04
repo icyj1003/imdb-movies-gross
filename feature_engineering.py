@@ -7,9 +7,12 @@ df = pd.read_csv('./data/data_preprocessed.csv')
 
 print(df.columns)
 
-df = df[['casts', 'directors', 'writers', 'genres',
+df = df[['genres',
          'certificate', 'countries_of_origin', 'languages', 'production_companies', 'sound_mix', 'aspect_ratio', 'budget', 'runtime', 'release_date']]
 
-print(df.columns)
+df = pd.get_dummies(df, prefix=['genres',
+                                'certificate', 'countries_of_origin', 'languages', 'production_companies', 'sound_mix', 'aspect_ratio'])
+
+print(len(df.columns))
 
 df.to_csv('./data/data_model.csv', index=False, encoding='utf-8-sig')
