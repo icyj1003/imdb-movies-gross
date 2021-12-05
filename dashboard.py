@@ -29,6 +29,8 @@ num_movies = df.shape[0]
 
 app = dash.Dash(__name__)
 
+server = app.server
+
 # Graph 1
 fig1 = go.Figure()
 
