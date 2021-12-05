@@ -152,14 +152,14 @@ app.layout = html.Div(children=[
                  ], style=CONTAINER_STYLE(2)),
             ###############################
             html.Div(children=[
-                html.H3('Cat vs Gross'),
+                html.H3('Chưa đặt tên'),
                 dcc.Graph(id='graph-4')
             ], style=CONTAINER_STYLE(1))
         ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 15})
     ], style={'flex': 6}),
 
 ], style={
-    'display': 'flex', 'flex-direction': 'column'})
+    'display': 'flex', 'flex-direction': 'column', })
 
 
 # Graph-1 callback
@@ -224,7 +224,7 @@ def update_fig2(type):
     fig2 = go.Figure()
     color_list = ['#' + item for item in url.split('-')]
     fig2.add_trace(go.Pie(values=values,
-                   labels=labels, marker={'colors': color_list}))
+                   labels=labels, marker={'colors': color_list},  hole=.4))
 
     fig2.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
