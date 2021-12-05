@@ -146,7 +146,7 @@ app.layout = html.Div(children=[
                            'column-gap': '20px',
                            'justify-content': 'space-between'}),
                  dcc.Graph(id='graph-3')
-                 ], style=CONTAINER_STYLE(1)),
+                 ], style=CONTAINER_STYLE(2)),
             ###############################
             html.Div(children=[
                 html.H3('Cat vs Gross'),
@@ -312,12 +312,18 @@ def update_fig2(type):
 
     fig4 = go.Figure()
 
+    color_list = ['915e3d', 'c86f35', 'fe7f2d', 'fda53a',
+                  'fdb840', 'fcca46', 'cfc664', 'a1c181', '81ae86', '619b8a']
+
+    color = {labels[i]: color_list[i] for i in range(0, len(labels))}
+
     # Build dataframe
 
     for i, l, v in zip(range(0, len(labels)), labels, values):
         fig4.add_trace(go.Bar(x=[l],
                               y=[v],
-                              name=l))
+                              name=l,
+                              marker={'color': '#' + color[l]}))
 
     fig4.update_xaxes(showticklabels=False)
 
