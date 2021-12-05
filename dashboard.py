@@ -31,6 +31,10 @@ num_movies = df.shape[0]
 
 app = dash.Dash(__name__)
 
+app.title = 'IMDB Movie Dashboard'
+
+app._favicon = ("abc.ico")
+
 server = app.server
 
 url = '0d424d-1f4a57-315260-435a6a-546273-9c92a3-b1a6b8-c6b9cd-cec6df-d6d3f0'
