@@ -1,6 +1,6 @@
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
@@ -12,6 +12,7 @@ def CONTAINER_STYLE(flex=1):
     return {'padding': 20,
             'flex': flex,
             'margin': '0 5px',
+            'border-radius': '6px',
             'background-color': '#ffffff',
             'box-shadow': '-1px -1px 10px -1px rgba(166,166,166,1)'}
 
@@ -31,6 +32,9 @@ num_movies = df.shape[0]
 app = dash.Dash(__name__)
 
 server = app.server
+
+url = '0d424d-1f4a57-315260-435a6a-546273-9c92a3-b1a6b8-c6b9cd-cec6df-d6d3f0'
+
 
 # Main layout
 app.layout = html.Div(children=[
@@ -62,7 +66,7 @@ app.layout = html.Div(children=[
                 html.H3('MOVIES'),
                 html.P(num_movies)
             ], style=CONTAINER_STYLE()),
-        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', }),
+        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0'}),
         # Row 2
         html.Div(children=[
             # Graph 1
@@ -80,14 +84,14 @@ app.layout = html.Div(children=[
                             {'label': 'Average', 'value': 'A'},
                          ],
                          clearable=False,
-                         value='S', style={'flex': 1,
+                         value='A', style={'flex': 1,
                                            'appearance': 'none',
                                            'max-width': '150px',
-                                           'padding-right': '20px'}
+                                           'padding-right': '20px'
+                                           }
                      ),
                  ], style={'display': 'flex',
                            'flex-direction': 'row',
-                           'column-gap': '20px',
                            'justify-content': 'space-between'}),
                  dcc.Graph(id='graph-1')
                  ], style=CONTAINER_STYLE(2)),
@@ -114,11 +118,10 @@ app.layout = html.Div(children=[
                     ),
                 ], style={'display': 'flex',
                           'flex-direction': 'row',
-                          'column-gap': '20px',
                           'justify-content': 'space-between'}),
                 dcc.Graph(id='graph-2')
             ], style=CONTAINER_STYLE(1))
-        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0'}),
+        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 15}),
         # Row 3
         html.Div(children=[
             # Graph - 3
@@ -143,8 +146,8 @@ app.layout = html.Div(children=[
                      ),
                  ], style={'display': 'flex',
                            'flex-direction': 'row',
-                           'column-gap': '20px',
-                           'justify-content': 'space-between'}),
+                           'justify-content': 'space-between',
+                           }),
                  dcc.Graph(id='graph-3')
                  ], style=CONTAINER_STYLE(2)),
             ###############################
@@ -152,7 +155,7 @@ app.layout = html.Div(children=[
                 html.H3('Cat vs Gross'),
                 dcc.Graph(id='graph-4')
             ], style=CONTAINER_STYLE(1))
-        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0'})
+        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 15})
     ], style={'flex': 6}),
 
 ], style={
@@ -165,6 +168,8 @@ app.layout = html.Div(children=[
     Input(component_id='graph-1-dropdown', component_property='value')
 )
 def update_fig1(type):
+    color_list = ['#' + item for item in url.split('-')]
+    temp1 = [color_list[0] for i in range(11)]
     if type == "A":
         graph_1_data = df.groupby('release_date', as_index=False)[
             'gross_worldwide'].mean()
@@ -173,7 +178,7 @@ def update_fig1(type):
             'gross_worldwide'].sum()
 
     fig1 = px.area(graph_1_data, x='release_date',
-                   y='gross_worldwide')
+                   y='gross_worldwide', color_discrete_sequence=temp1)
 
     fig1.update_xaxes(title_text="Year", tickmode='linear')
 
@@ -181,7 +186,7 @@ def update_fig1(type):
 
     fig1.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
-        paper_bgcolor="White",)
+        paper_bgcolor="White", )
 
     return fig1
 
@@ -195,7 +200,7 @@ def update_fig2(type):
     values = []
     labels = []
     if type == 'G':
-        graph_2_data = df.genres.value_counts().head(5)/df.shape[0] * 100
+        graph_2_data = df.genres.value_counts().head(4)/df.shape[0] * 100
         values = graph_2_data.values
         values = np.append(values, 100-values.sum())
         labels = graph_2_data.index
@@ -207,7 +212,7 @@ def update_fig2(type):
         labels = graph_2_data.index
         labels = np.append(labels, 'Others')
     elif type == 'C':
-        graph_2_data = df.countries_of_origin.value_counts().head(10) / \
+        graph_2_data = df.countries_of_origin.value_counts().head(9) / \
             df.shape[0] * 100
         values = graph_2_data.values
         values = np.append(values, 100-values.sum())
@@ -217,9 +222,9 @@ def update_fig2(type):
     labels = [label.strip(',').replace(',', ', ') for label in labels]
 
     fig2 = go.Figure()
-
+    color_list = ['#' + item for item in url.split('-')]
     fig2.add_trace(go.Pie(values=values,
-                   labels=labels))
+                   labels=labels, marker={'colors': color_list}))
 
     fig2.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
@@ -238,7 +243,10 @@ def update_fig2(type):
     Input(component_id='graph-3-dropdown', component_property='value')
 )
 def update_fig2(type):
+    color_list = ['#' + item for item in url.split('-')]
+    temp = color_list
     if type == 'A':
+        temp.reverse()
         graph_3_data = df[['title', 'gross_worldwide']].sort_values(
             'gross_worldwide', ascending=False).head(10)
 
@@ -247,16 +255,25 @@ def update_fig2(type):
         graph_3_data = df[['title', 'gross_worldwide']].sort_values(
             'gross_worldwide', ascending=True).head(10)
 
-        graph_3_data = graph_3_data.sort_values(
-            'gross_worldwide', ascending=False)
+        # graph_3_data = graph_3_data.sort_values(
+        #     'gross_worldwide', ascending=False)
 
     fig3 = go.Figure()
+    labels = graph_3_data['title'].tolist()
 
-    fig3.add_trace(go.Bar(x=graph_3_data['gross_worldwide'],
-                          y=graph_3_data['title'], orientation='h'))
+    color = {labels[i]: temp[i]
+             for i in range(0, len(labels))}
+
+    for i, l, v in zip(range(0, len(labels)), labels, graph_3_data['gross_worldwide'].tolist()):
+        fig3.add_trace(go.Bar(y=[l],
+                              x=[v],
+                              name=l,
+                              marker={'color': color[l]}, orientation='h'))
     fig3.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
         paper_bgcolor="White",
+        showlegend=False
+
     )
     fig3.update_xaxes(title_text="Gross")
     return fig3
@@ -285,7 +302,7 @@ def update_fig2(type):
         labels = graph_2_data.index
         labels = np.append(labels, 'Others')
     elif type == 'C':
-        graph_2_data = df.countries_of_origin.value_counts().head(10) / \
+        graph_2_data = df.countries_of_origin.value_counts().head(9) / \
             df.shape[0] * 100
         values = graph_2_data.values
         values = np.append(values, 100-values.sum())
@@ -311,19 +328,14 @@ def update_fig2(type):
         paper_bgcolor="White",)
 
     fig4 = go.Figure()
-
-    color_list = ['915e3d', 'c86f35', 'fe7f2d', 'fda53a',
-                  'fdb840', 'fcca46', 'cfc664', 'a1c181', '81ae86', '619b8a']
-
+    color_list = ['#' + item for item in url.split('-')]
     color = {labels[i]: color_list[i] for i in range(0, len(labels))}
-
-    # Build dataframe
 
     for i, l, v in zip(range(0, len(labels)), labels, values):
         fig4.add_trace(go.Bar(x=[l],
                               y=[v],
                               name=l,
-                              marker={'color': '#' + color[l]}))
+                              marker={'color': color[l]}))
 
     fig4.update_xaxes(showticklabels=False)
 
