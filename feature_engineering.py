@@ -7,8 +7,8 @@ df = pd.read_csv('./data/data_preprocessed.csv')
 
 print(df.columns)
 
-df = df[['genres',
-         'certificate', 'countries_of_origin', 'languages', 'production_companies', 'sound_mix', 'aspect_ratio', 'budget', 'runtime', 'release_date']]
+df = df[['genres', 'countries_of_origin', 'languages',
+         'runtime', 'release_date']]
 
 df = pd.get_dummies(df, prefix=['genres',
                                 'certificate', 'countries_of_origin', 'languages', 'production_companies', 'sound_mix', 'aspect_ratio'])
