@@ -362,7 +362,7 @@ def pp_cast(casts):
     Output: 
     """
     if str(casts) != "nan":
-        return str(casts).lstrip('Stars,')
+        return re.sub('Stars,', '', str(casts))
     else:
         return None
 
@@ -373,7 +373,7 @@ def pp_writer(casts):
     Output:
     """
     if str(casts) != "nan":
-        return str(casts).lstrip('Writers,')
+        return re.sub('Writers,', '', str(casts))
     else:
         return None
 

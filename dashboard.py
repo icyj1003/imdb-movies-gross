@@ -249,8 +249,8 @@ def update_fig2(type):
 def update_fig2(type):
     color_list = ['#' + item for item in url.split('-')]
     temp = color_list
+    temp.reverse()
     if type == 'A':
-        temp.reverse()
         graph_3_data = df[['title', 'gross_worldwide']].sort_values(
             'gross_worldwide', ascending=False).head(10)
 
@@ -290,48 +290,43 @@ def update_fig2(type):
     Input(component_id='graph-2-dropdown', component_property='value')
 )
 def update_fig2(type):
-    values = []
-    labels = []
-
+    data4 = None
     if type == 'G':
         graph_2_data = df.genres.value_counts().head(5)/df.shape[0] * 100
-        values = graph_2_data.values
-        values = np.append(values, 100-values.sum())
         labels = graph_2_data.index
-        labels = np.append(labels, 'Others')
+        data4 = df[df['genres'].isin(labels)].groupby(
+            'genres', as_index=False)['gross_worldwide'].mean()
+
+        labels = [label.strip(',').replace(',', ', ')
+                  for label in data4.genres.values.tolist()]
+
+        values = data4['gross_worldwide'].values.tolist()
+
     elif type == 'L':
         graph_2_data = df.languages.value_counts().head(9)/df.shape[0] * 100
-        values = graph_2_data.values
-        values = np.append(values, 100-values.sum())
         labels = graph_2_data.index
-        labels = np.append(labels, 'Others')
+        data4 = df[df['languages'].isin(labels)].groupby(
+            'languages', as_index=False)['gross_worldwide'].mean()
+
+        labels = [label.strip(',').replace(',', ', ')
+                  for label in data4.languages.values.tolist()]
+
+        values = data4['gross_worldwide'].values.tolist()
+
     elif type == 'C':
         graph_2_data = df.countries_of_origin.value_counts().head(9) / \
             df.shape[0] * 100
-        values = graph_2_data.values
-        values = np.append(values, 100-values.sum())
         labels = graph_2_data.index
-        labels = np.append(labels, 'Others')
+        data4 = df[df['countries_of_origin'].isin(labels)].groupby(
+            'countries_of_origin', as_index=False)['gross_worldwide'].mean()
 
-    labels = [label.strip(',').replace(',', ', ') for label in labels]
+        labels = [label.strip(',').replace(',', ', ')
+                  for label in data4.countries_of_origin.values.tolist()]
 
-    fig4 = go.Figure()
-
-    fig4.add_trace(go.Bar(y=values,
-                   x=labels))
-    fig4.update_traces(marker_color='green')
-    fig4.update_layout(
-        xaxis=dict(
-            showticklabels=False
-        ),
-        margin=dict(l=20, r=20, t=20, b=20),
-        legend=dict(orientation="h",
-                    xanchor="center",
-                    x=0.5),
-
-        paper_bgcolor="White",)
+        values = data4['gross_worldwide'].values.tolist()
 
     fig4 = go.Figure()
+
     color_list = ['#' + item for item in url.split('-')]
     color = {labels[i]: color_list[i] for i in range(0, len(labels))}
 
