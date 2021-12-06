@@ -37,48 +37,61 @@ app._favicon = ("abc.ico")
 
 server = app.server
 
-url = '0d424d-1f4a57-315260-435a6a-546273-9c92a3-b1a6b8-c6b9cd-cec6df-d6d3f0'
+url = '12263a-0c717e-06bcc1-66cac9-c5d8d1-dde3de-f4edea-f4dfcc-f4d1ae-f5d5b5'
 
 
 # Main layout
 app.layout = html.Div(children=[
     html.Div([
-        html.H1('IMDB Movie Dashboard', style={
+        html.H1('IMDB MOVIES DASHBOARD', style={
+            'font-family': 'verdana',
             'width': '1000',
-            'padding': 10
-        })
+            'padding': 10,
+            'font-size': 40,
+            'text-shadow': '0px 0px 5px #ffffff'
+        }),
     ], style={
-        'flex': 1
+        'flex': 1,
+        'margin': 10,
+        'color': '#ffffff',
     }),
     html.Div(children=[
         # Row 1
         html.Div([
             html.Div(children=[
-                html.H3('GROSS'),
-                html.P(f"{sum_gross}$")
+                html.H3('GROSS', style={
+                        'font-size': 25, 'font-family': 'verdana'}),
+                html.P(f"{int(sum_gross)} $", style={
+                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
             ], style=CONTAINER_STYLE()),
 
             html.Div(children=[
-                html.H3('BUDGET'),
-                html.P(f"{sum_budget}$")
+                html.H3('BUDGET', style={
+                        'font-size': 25, 'font-family': 'verdana'}),
+                html.P(f"{int(sum_budget)} $", style={
+                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
             ], style=CONTAINER_STYLE()),
             html.Div(children=[
-                html.H3('AVERAGE RUNTIME'),
-                html.P(f"{average_runtime} minutes")
+                html.H3('AVERAGE RUNTIME', style={
+                        'font-size': 25, 'font-family': 'verdana'}),
+                html.P(f"{int(average_runtime)} minutes", style={
+                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
             ], style=CONTAINER_STYLE()),
             html.Div(children=[
-                html.H3('MOVIES'),
-                html.P(num_movies)
+                html.H3('MOVIES', style={
+                        'font-size': 25, 'font-family': 'verdana'}),
+                html.P(num_movies, style={
+                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
             ], style=CONTAINER_STYLE()),
-        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0'}),
+        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-left': 10, 'margin-right': 10}),
         # Row 2
         html.Div(children=[
             # Graph 1
             html.Div(children=[
                  html.Div(children=[
                      # Graph 1 Label
-                     html.H3('Doanh thu theo năm',  style={
-                         'flex': 1, 'max-width': '100%'}),
+                     html.H3('GROSS OVER YEARS',  style={'font-size': 25,
+                                                         'flex': 1, 'max-width': '100%', 'font-family': 'verdana'}),
 
                      # Graph 1 Label
                      dcc.Dropdown(
@@ -103,8 +116,8 @@ app.layout = html.Div(children=[
             html.Div(children=[
                 html.Div(children=[
                     # Graph 2 Label
-                    html.H3('Top phổ biến',  style={
-                        'flex': 1, 'max-width': '100%'}),
+                    html.H3('TOP POPULAR',  style={'font-size': 25,
+                                                   'flex': 1, 'max-width': '100%', 'font-family': 'verdana'}),
 
                     # Graph 2 Label
                     dcc.Dropdown(
@@ -125,15 +138,15 @@ app.layout = html.Div(children=[
                           'justify-content': 'space-between'}),
                 dcc.Graph(id='graph-2')
             ], style=CONTAINER_STYLE(1))
-        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 15}),
+        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 25, 'margin-left': 10}),
         # Row 3
         html.Div(children=[
             # Graph - 3
             html.Div(children=[
                  html.Div(children=[
                      # Graph 1 Label
-                     html.H3('Top phim',  style={
-                         'flex': 1, 'max-width': '100%'}),
+                     html.H3('TOP MOVIES',  style={'font-size': 25,
+                                                   'flex': 1, 'max-width': '100%', 'font-family': 'verdana'}),
 
                      # Graph 1 Label
                      dcc.Dropdown(
@@ -156,17 +169,35 @@ app.layout = html.Div(children=[
                  ], style=CONTAINER_STYLE(2)),
             ###############################
             html.Div(children=[
-                html.H3('Chưa đặt tên'),
+                html.H3(id='title-4',
+                        style={'font-size': 23, 'font-family': 'verdana'}),
                 dcc.Graph(id='graph-4')
             ], style=CONTAINER_STYLE(1))
-        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 15})
+        ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 25, 'margin-left': 10})
     ], style={'flex': 6}),
-
+    html.Sub('DS105.M11: Đồ án Phân tích và trực quan dữ liệu - 19520649 - 19520402 -19521456',
+             style={'margin': '10', 'color': '#12263a'})
 ], style={
-    'display': 'flex', 'flex-direction': 'column', })
+    'display': 'flex', 'flex-direction': 'column', 'background-image': 'linear-gradient(#12263a, #c5d8d1, #f5d5b5)', 'margin': 0})
 
+# title 4 callback
+
+
+@ app.callback(
+    Output(component_id='title-4', component_property='children'),
+    Input(component_id='graph-2-dropdown', component_property='value')
+)
+def get_title(va):
+    if va == 'G':
+        return 'AVERAGE GROSS BY TOP POPULAR GENRES'
+    elif va == 'L':
+        return 'AVERAGE GROSS BY TOP POPULAR LANGUAGES'
+    elif va == 'C':
+        return 'AVERAGE GROSS BY TOP POPULAR COUNTRIES'
 
 # Graph-1 callback
+
+
 @ app.callback(
     Output(component_id='graph-1', component_property='figure'),
     Input(component_id='graph-1-dropdown', component_property='value')
