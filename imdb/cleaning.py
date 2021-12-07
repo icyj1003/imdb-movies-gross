@@ -393,7 +393,7 @@ def pp_ar(ar):
         or temp.find('highdefinition') != -1
             or temp.find('1.78:1') != -1) and temp.find('-') == -1:
         temp = '1.78:1'
-    elif (temp.find('Anamorphic') != -1 or temp.find('2:39:1') != -1 or temp.find('2.39') != -1) and temp.find('-') == -1:
+    elif (temp.find('Anamorphic') != -1 or temp.find('2:39:1') != -1 or temp.find('2.39') != -1) and temp.find('-') == -1 or temp.find('2:39') != -1:
         temp = '2.39:1'
     elif temp.find('4:3') != -1 and temp.find('-') == -1:
         temp = '1.33:1'
@@ -410,3 +410,17 @@ def pp_ar(ar):
     if temp.find('-') != -1:
         temp = temp.split('-')[1]
     return temp
+
+
+def ar_setting(ar):
+    if ar != None and str(ar) != 'nan':
+        if ar.find(':') != -1:
+            temp = ar.split(':')
+            if temp[1] != '1':
+                return str(float(temp[1])) + ':' + str(float(temp[0]))
+            else:
+                return str(float(temp[0])) + ':' + str(float(temp[1]))
+        else:
+            return ar
+    else:
+        return None
