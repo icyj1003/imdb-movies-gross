@@ -90,7 +90,7 @@ app.layout = html.Div(children=[
                         'font-family': 'verdana',
                         'display': 'inline',
                         "text-align": "center"}),
-                html.P(f"{int(sum_budget/1000000)}M", style={
+                html.P(f"{int(sum_budget/1000000000)}B", style={
                     'font-size': '3vw',
                      'font-family': 'verdana',
                      'color': '#0c717e',
