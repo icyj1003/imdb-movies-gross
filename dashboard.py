@@ -33,6 +33,17 @@ app = dash.Dash(__name__)
 
 app.title = 'IMDB Movie Dashboard'
 
+fig_5 = px.scatter(df, x='budget', y='gross_worldwide')
+
+fig_5.update_layout(
+    margin=dict(l=20, r=20, t=20, b=20),
+    paper_bgcolor="White",
+    showlegend=False
+
+)
+fig_5.update_xaxes(title_text="Budget")
+fig_5.update_yaxes(title_text="Gross")
+
 app._favicon = ("abc.ico")
 
 server = app.server
@@ -199,6 +210,11 @@ app.layout = html.Div(children=[
                            }),
                  dcc.Graph(id='graph-3')
                  ], style=CONTAINER_STYLE(2)),
+            html.Div(children=[
+                html.H3('GROSS VS BUDGET',
+                        style={'font-size': 23, 'font-family': 'verdana'}),
+                dcc.Graph(figure=fig_5
+                          )], style=CONTAINER_STYLE(1)),
             ###############################
             html.Div(children=[
                 html.H3(id='title-4',
