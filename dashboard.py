@@ -195,8 +195,8 @@ app.layout = html.Div(children=[
                      dcc.Dropdown(
                          id='graph-3-dropdown',
                          options=[
-                            {'label': 'Ascending', 'value': 'A'},
-                            {'label': 'Decending', 'value': 'D'},
+                            {'label': 'Cao nhất', 'value': 'A'},
+                            {'label': 'Thấp nhất', 'value': 'D'},
                          ],
                          clearable=False,
                          value='A', style={'flex': 1,
