@@ -192,12 +192,7 @@ def currency_conv(old):
 
 def certification_conv(old):
     """ KHÔI
-    Tại liệu tham khảo
-    Chuyển đổi các tiêu chuẩn phân loại phim về của Việt Nam
-    https://rating-system.fandom.com/wiki/Vietnam_Movie_Rating_System
-    https://en.wikipedia.org/wiki/TV_Parental_Guidelines
-    https://en.wikipedia.org/wiki/Motion_Picture_Association_film_rating_system
-    https://en.wikipedia.org/wiki/Hong_Kong_motion_picture_rating_system
+    Chuyển đổi các tiêu chuẩn phân loại phim về tiểu chuẩn của Việt Nam
     """
 
     if (str(old).find('Rated R ') != -1 or
@@ -240,6 +235,7 @@ def certification_conv(old):
 
 def get_year(old):
     """ KHÔI
+    Tách năm ra khỏi chuỗi
     """
 
     if str(old) != None and str(old) != "nan":
@@ -344,8 +340,7 @@ def pp_score(score):
 
 def pp_color(color):
     """ KHÔI
-    Input: 
-    Output: 
+    Chuyển color về Color hoặc Black and White 
     """
     if str(color) != 'nan':
         if str(color).find('Color') != -1:
@@ -358,8 +353,7 @@ def pp_color(color):
 
 def pp_cast(casts):
     """ KHÔI
-    Input:
-    Output: 
+    Loại bỏ tiền tố Stars
     """
     if str(casts) != "nan":
         return re.sub('Stars,', '', str(casts))
@@ -369,8 +363,7 @@ def pp_cast(casts):
 
 def pp_writer(casts):
     """ KHÔI
-    Input: 
-    Output:
+    Loại bỏ tiền tố Writers
     """
     if str(casts) != "nan":
         return re.sub('Writers,', '', str(casts))
@@ -380,8 +373,8 @@ def pp_writer(casts):
 
 def pp_ar(ar):
     """ KHÔI
-    Input: 
-    Output: 
+    Input: Đầu vào là Độ phân giải ở dạng thô
+    Output: Độ phân giải ở định dạng x:y
     """
     if str(ar) == 'nan':
         return None
@@ -413,6 +406,10 @@ def pp_ar(ar):
 
 
 def ar_setting(ar):
+    """ KHÔI
+    Input: Đầu vào là Độ phân giải ở dạng thô
+    Output: Độ phân giải ở định dạng x:1
+    """
     if ar != None and str(ar) != 'nan':
         if ar.find(':') != -1:
             temp = ar.split(':')
