@@ -59,29 +59,61 @@ app.layout = html.Div(children=[
         # Row 1
         html.Div([
             html.Div(children=[
-                html.H3('GROSS', style={
-                        'font-size': 25, 'font-family': 'verdana'}),
-                html.P(f"{int(sum_gross)} $", style={
-                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
+                html.H3('TOTAL GROSS ($)', style={
+                        'font-size': 25,
+                        'display': 'inline',
+                        'font-family': 'verdana',
+                        "text-align": "center"}),
+                html.P(f"{int(sum_gross/1000000000)}B", style={
+                    'font-size': '3vw',
+                     'font-family': 'verdana',
+                     'color': '#0c717e',
+                       'font-weight': 'bold',
+                       'white-space': 'normal',
+                       "text-align": "center"})
             ], style=CONTAINER_STYLE()),
 
             html.Div(children=[
-                html.H3('BUDGET', style={
-                        'font-size': 25, 'font-family': 'verdana'}),
-                html.P(f"{int(sum_budget)} $", style={
-                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
+                html.H3('TOAL BUDGET ($)', style={
+                        'font-size': 25,
+                        'font-family': 'verdana',
+                        'display': 'inline',
+                        "text-align": "center"}),
+                html.P(f"{int(sum_budget/1000000)}M", style={
+                    'font-size': '3vw',
+                     'font-family': 'verdana',
+                     'color': '#0c717e',
+                       'font-weight': 'bold',
+                       'white-space': 'normal',
+                       "text-align": "center"})
             ], style=CONTAINER_STYLE()),
             html.Div(children=[
-                html.H3('AVERAGE RUNTIME', style={
-                        'font-size': 25, 'font-family': 'verdana'}),
-                html.P(f"{int(average_runtime)} minutes", style={
-                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
+                html.H3('AVERAGE RUNTIME (M)', style={
+                        'font-size': 25,
+                        'font-family': 'verdana',
+                        'display': 'inline',
+                        "text-align": "center"}),
+                html.P(f"{int(average_runtime)}", style={
+                    'font-size': '3vw',
+                     'font-family': 'verdana',
+                     'color': '#0c717e',
+                       'font-weight': 'bold',
+                       'white-space': 'normal',
+                       "text-align": "center"})
             ], style=CONTAINER_STYLE()),
             html.Div(children=[
-                html.H3('MOVIES', style={
-                        'font-size': 25, 'font-family': 'verdana'}),
+                html.H3('NUMBER OF MOVIES', style={
+                        'font-size': 25,
+                        'font-family': 'verdana',
+                        'display': 'inline',
+                        "text-align": "center"}),
                 html.P(num_movies, style={
-                    'font-size': 40, 'font-family': 'verdana', 'color': '#0c717e', 'font-weight': 'bold'})
+                    'font-size': '3vw',
+                     'font-family': 'verdana',
+                     'color': '#0c717e',
+                       'font-weight': 'bold',
+                       'white-space': 'normal',
+                       "text-align": "center"})
             ], style=CONTAINER_STYLE()),
         ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-left': 10, 'margin-right': 10}),
         # Row 2
@@ -174,11 +206,18 @@ app.layout = html.Div(children=[
                 dcc.Graph(id='graph-4')
             ], style=CONTAINER_STYLE(1))
         ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 25, 'margin-left': 10})
-    ], style={'flex': 6}),
+    ], style={'flex': 6, 'overflow': 'auto'}),
     html.Sub('DS105.M11: Đồ án Phân tích và trực quan dữ liệu - 19520649 - 19520402 -19521456',
              style={'margin': '10', 'color': '#12263a'})
 ], style={
-    'display': 'flex', 'flex-direction': 'column', 'background-image': 'linear-gradient(#12263a, #c5d8d1, #f5d5b5)', 'margin': 0})
+    'display': 'flex',
+    'flex-direction': 'column',
+    'background-image': 'linear-gradient(#12263a, #c5d8d1, #f5d5b5)',
+    'margin': 0,
+    'background-size': 'cover',
+    '-webkit-background-size': 'cover',
+    ' -moz-background-size': 'cover',
+    '-o-background-size': 'cover', 'overflow': 'auto'})
 
 # title 4 callback
 
