@@ -74,7 +74,7 @@ app.layout = html.Div(children=[
             ], style=CONTAINER_STYLE()),
 
             html.Div(children=[
-                html.H3('TOAL BUDGET ($)', style={
+                html.H3('TOTAL BUDGET ($)', style={
                         'font-size': 25,
                         'font-family': 'verdana',
                         'display': 'inline',
@@ -142,7 +142,7 @@ app.layout = html.Div(children=[
                  ], style={'display': 'flex',
                            'flex-direction': 'row',
                            'justify-content': 'space-between'}),
-                 dcc.Graph(id='graph-1', animate=True)
+                 dcc.Graph(id='graph-1')
                  ], style=CONTAINER_STYLE(2)),
             # Graph 2
             html.Div(children=[
@@ -168,7 +168,7 @@ app.layout = html.Div(children=[
                 ], style={'display': 'flex',
                           'flex-direction': 'row',
                           'justify-content': 'space-between'}),
-                dcc.Graph(id='graph-2', animate=True)
+                dcc.Graph(id='graph-2')
             ], style=CONTAINER_STYLE(1))
         ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 25, 'margin-left': 10}),
         # Row 3
@@ -197,13 +197,13 @@ app.layout = html.Div(children=[
                            'flex-direction': 'row',
                            'justify-content': 'space-between',
                            }),
-                 dcc.Graph(id='graph-3', animate=True)
+                 dcc.Graph(id='graph-3')
                  ], style=CONTAINER_STYLE(2)),
             ###############################
             html.Div(children=[
                 html.H3(id='title-4',
                         style={'font-size': 23, 'font-family': 'verdana'}),
-                dcc.Graph(id='graph-4', animate=True,
+                dcc.Graph(id='graph-4',
                           )
             ], style=CONTAINER_STYLE(1))
         ], style={'display': 'flex', 'flex-direction': 'row', 'margin': '10px 0', 'margin-right': 25, 'margin-left': 10})
